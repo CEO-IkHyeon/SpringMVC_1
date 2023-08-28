@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * 모든 컨트롤러에 View로 이동하는 코드가 중복 -> view를 처리하는 객체
+ */
 public class MyView {
     private String viewPath;
 

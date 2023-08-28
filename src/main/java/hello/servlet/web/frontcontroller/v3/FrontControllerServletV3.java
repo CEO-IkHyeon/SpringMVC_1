@@ -19,7 +19,7 @@ import java.util.Map;
 @WebServlet(name = "FrontControllerServletV3", urlPatterns = "/front-controller/v3/*")
 public class FrontControllerServletV3 extends HttpServlet {
 
-    private Map<String, ControllerV3> controllerMap = new HashMap<>();
+    private final Map<String, ControllerV3> controllerMap = new HashMap<>();
 
     public FrontControllerServletV3() {
         controllerMap.put("/front-controller/v3/members/new-form",new MemberFormControllerV3());
@@ -50,11 +50,7 @@ public class FrontControllerServletV3 extends HttpServlet {
         view.render(mv.getModel(), request, response); // model을 넘겨준다(view가 rendering하려면 model 정보가 필요하기 때문에)
     }
 
-    // 논리 경로를 입력하면 절대 경로로 바꿔주는 메서드
-    private MyView viewResolver(String viewName) {
-        return new MyView("/WEB-INF/views/" + viewName + ".jsp");
-    }
-
+    // request로 들어온 모든 parameter들을 Map에 담는다 -> Controller에게 전달해주기 위해
     private Map<String, String> createParamMap(HttpServletRequest request) {
         Map<String, String> paramMap = new HashMap<>();
         request.getParameterNames().asIterator()
@@ -62,5 +58,12 @@ public class FrontControllerServletV3 extends HttpServlet {
         // paramName : key 변수명
         return paramMap;
     }
+
+    // 논리 경로를 입력하면 절대 경로로 바꿔주는 메서드
+    private MyView viewResolver(String viewName) {
+        return new MyView("/WEB-INF/views/ " + viewName + ".jsp");
+    }
+
+
 }
 

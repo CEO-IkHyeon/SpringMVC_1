@@ -19,8 +19,8 @@ public class MemberSaveControllerV3 implements ControllerV3 {
         memberRepository.save(member);
 
         ModelView mv = new ModelView("save-result");
-        mv.getModel().put("member", member);
-        return mv;
+        mv.getModel().put("member", member); // = request.setAttribute("member", member);  request 대신 Model 객체의 Map에 넣어서 JSP에게 전달
 
+        return mv;
     }
 }
